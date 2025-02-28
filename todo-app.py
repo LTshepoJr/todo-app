@@ -5,6 +5,8 @@ while True:
         case 'add':
             userAddition=input('Enter a todo: ').strip()
             todos.append(userAddition.capitalize())
+            fileOverWrite=open('todo-app-storage.txt', 'w')
+            fileOverWrite.writelines(todos)
             print('Successfully added!!')
         case 'show' | 'display':
             for index,todo in enumerate(todos):
