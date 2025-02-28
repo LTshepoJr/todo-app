@@ -1,40 +1,24 @@
-countries = []
-cities=[]
+todos = []
 while True:
-    userAction=input("Choose between add, show / display, edit or exit: ").lower().strip()
+    userAction=input("Choose between add, show / display, edit, complete or exit: ").lower().strip()
     match userAction:
         case 'add':
-            userChooses = input("Choose between country or city: ").lower().strip()
-            match userChooses:
-                case 'country':
-                    country=input('Enter a country: ').strip()
-                    countries.append(country.title())
-                case 'city':
-                    city = input('Enter a city: ').strip()
-                    cities.append(city.title())
+            userAddition=input('Enter a todo: ').strip()
+            todos.append(userAddition.capitalize())
+            print('Successfully added!!')
         case 'show' | 'display':
-            userPlace=input("Show country, city or both?: ").lower().strip()
-            match userPlace:
-                case 'country':
-                    for item in countries:
-                        print(item)
-                case 'city':
-                    for item in cities:
-                        print(item)
-                case 'both':
-                    print(countries, cities)
+            for index,todo in enumerate(todos):
+                print(f'{index+1}. {todo.capitalize()}')
         case 'edit':
-            userChoose=input('Edit country or city?:  ').lower().strip()
-            number=int(input('Enter a number: '))
-            match userChoose:
-                case 'city':
-                    print(f'You are going to change {cities[number-1]}')
-                    newCity=input('Enter new city: ').title()
-                    cities[number-1]=newCity
-                case 'country':
-                    print(f'You are going to change {countries[number-1]}')
-                    newCountry = input('Enter new country: ').title()
-                    countries[number - 1]=newCountry
+            userEdit=int(input('Enter the number you want edit: '))
+            print(f'You are going to change {todos[userEdit - 1]}.')
+            userNewTodo=input('What is your new todo?: ').strip()
+            todos[userEdit-1]=userNewTodo
+            print('Successfully edited!!')
+        case 'complete':
+            popNumber=int(input('Enter the number you completed: '))
+            print(f'You completed: {todos.pop(popNumber-1)}')
+            print('Successfully removed!!')
         case 'exit':
             break
 
