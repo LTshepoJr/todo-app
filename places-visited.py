@@ -1,50 +1,54 @@
 countries = []
 cities=[]
+def userAdditionFunction(userChoose, regionArray):
+    region = input(f'Enter a {userChoose}: ').strip()
+    return regionArray.append(region.title())
+def userDisplayFunction(regionArray):
+    for index, item in enumerate(regionArray):
+        print(f'{index + 1}. {item}')
+def userEditFunction(number, regionArray, userEdit):
+    print(f'You are going to change {regionArray[number - 1]}')
+    newCity = input(f'Enter new {userEdit}: ').title()
+    regionArray[number - 1] = newCity
+def userVisitFunction(regionArray, number):
+    print(f'You have visited: {regionArray.pop(number - 1)}')
 while True:
     userAction=input("Choose between add, show / display, edit, visited or exit: ").lower().strip()
     match userAction:
         case 'add':
-            userChooses = input("Choose between country or city: ").lower().strip()
-            match userChooses:
+            userAddition = input("Choose between country or city: ").lower().strip()
+            match userAddition:
                 case 'country':
-                    country=input('Enter a country: ').strip()
-                    countries.append(country.title())
+                    userAdditionFunction(userAddition, countries)
                 case 'city':
-                    city = input('Enter a city: ').strip()
-                    cities.append(city.title())
+                    userAdditionFunction(userAddition, cities)
             print('Successfully added!!')
         case 'show' | 'display':
-            userPlace=input("Show country, city or both?: ").lower().strip()
-            match userPlace:
+            userDisplay=input("Show country, city or both?: ").lower().strip()
+            match userDisplay:
                 case 'country':
-                    for index,item in enumerate(countries):
-                        print(f'{index+1}. {item}')
+                    userDisplayFunction(countries)
                 case 'city':
-                    for index,item in enumerate(cities):
-                        print(f'{index+1}. {item}')
+                    userDisplayFunction(cities)
                 case 'both':
-                    print(countries, cities)
+                    print(f'Countries: {countries}//', f'//Cities: {cities}')
         case 'edit':
-            userChoose=input('Edit country or city?: ').lower().strip()
+            userEdit=input('Edit country or city?: ').lower().strip()
             number=int(input('Enter a number: '))
-            match userChoose:
+            match userEdit:
                 case 'city':
-                    print(f'You are going to change {cities[number-1]}')
-                    newCity=input('Enter new city: ').title()
-                    cities[number-1]=newCity
+                    userEditFunction(number, cities, userEdit)
                 case 'country':
-                    print(f'You are going to change {countries[number-1]}')
-                    newCountry = input('Enter new country: ').title()
-                    countries[number - 1]=newCountry
+                    userEditFunction(number, countries, userEdit)
             print('Successfully edited!!')
         case 'visited':
-            userChoose=input('Country or city visited?: ').lower().strip()
+            userVisit=input('Country or city visited?: ').lower().strip()
             number=int(input('Enter a number: '))
-            match userChoose:
+            match userVisit:
                 case 'city':
-                    print(f'You have visted: {cities.pop(number-1)}')
+                    userVisitFunction(cities, number)
                 case 'country':
-                    print(f'You have visted: {countries.pop(number-1)}')
+                    userVisitFunction(countries, number)
             print('Successfully removed!!')
         case 'exit':
             break
