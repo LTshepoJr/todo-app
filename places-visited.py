@@ -1,8 +1,11 @@
 def read_file_text(place):
-    with open(f'Storage-Texts/places-visited-{place}.txt',
-              'r') as file:
-        file_list=file.readlines()
-        return file_list
+    try:
+        with open(f'Storage-Texts/places-visited-{place}.txt',
+                  'r') as file:
+            file_list=file.readlines()
+            return file_list
+    except FileNotFoundError:
+        exit('You did not enter country or city.')
 
 def write_file_text(user, region_array):
     with open('Storage-Texts/places-visited-'
@@ -55,25 +58,31 @@ while True:
                                        userPlace)
                 print('Successfully added!!')
             elif userChooses=='edit':
-                number=int(input('Enter a number: '))
-                user_edit_function(read_file_text(f'countries'
-                                                    if userPlace=='country'
-                                                    else 'cities' 
-                                                    if userPlace=='city' 
-                                                    else ''),
-                                   userPlace,
-                                   number)
-                print('Successfully edited!!')
+                try:
+                    number=int(input('Enter a number: '))
+                    user_edit_function(read_file_text(f'countries'
+                                                        if userPlace=='country'
+                                                        else 'cities'
+                                                        if userPlace=='city'
+                                                        else ''),
+                                       userPlace,
+                                       number)
+                    print('Successfully edited!!')
+                except ValueError:
+                    print('Please enter a number!!')
             elif userChooses=='visited':
-                number=int(input('Enter a number: '))
-                user_visit_function(read_file_text(f'countries'
-                                                    if userPlace=='country'
-                                                    else 'cities' 
-                                                    if userPlace=='city' 
-                                                    else ''),
-                                    userPlace,
-                                    number)
-                print('Successfully removed!!')
+                try:
+                    number=int(input('Enter a number: '))
+                    user_visit_function(read_file_text(f'countries'
+                                                        if userPlace=='country'
+                                                        else 'cities'
+                                                        if userPlace=='city'
+                                                        else ''),
+                                        userPlace,
+                                        number)
+                    print('Successfully removed!!')
+                except ValueError:
+                    print('Please enter a number!!')
             elif userChooses=='show' or 'display':
                 if userAction.split()[1]!='both':
                     user_display_function(read_file_text(f'countries'
@@ -100,33 +109,47 @@ while True:
 
             case 'edit':
                 userEdit=input('Edit country or city?: ').lower().strip()
-                number=int(input('Enter a number: '))
                 match userEdit:
                     case 'city':
-                        user_edit_function(read_file_text('cities'),
-                                           userEdit,
-                                           number)
-                        print('Successfully edited!!')
+                        try:
+                            number=int(input('Enter a number: '))
+                            user_edit_function(read_file_text('cities'),
+                                               userEdit,
+                                               number)
+                            print('Successfully edited!!')
+                        except ValueError:
+                            print('Please enter a number!!')
                     case 'country':
-                        user_edit_function(read_file_text('countries'),
-                                           userEdit,
-                                           number)
-                        print('Successfully edited!!')
+                        try:
+                            number = int(input('Enter a number: '))
+                            user_edit_function(read_file_text('countries'),
+                                               userEdit,
+                                               number)
+                            print('Successfully edited!!')
+                        except ValueError:
+                            print('Please enter a number!!')
                 
             case 'visited':
                 userVisit=input('Country or city visited?: ').lower().strip()
-                number=int(input('Enter a number: '))
                 match userVisit:
                     case 'city':
-                        user_visit_function(read_file_text('cities'),
-                                            userVisit,
-                                            number)
-                        print('Successfully removed!!')
+                        try:
+                            number = int(input('Enter a number: '))
+                            user_visit_function(read_file_text('cities'),
+                                                userVisit,
+                                                number)
+                            print('Successfully removed!!')
+                        except ValueError:
+                            print('Please enter a number!!')
                     case 'country':
-                        user_visit_function(read_file_text('countries'),
-                                            userVisit,
-                                            number)
-                        print('Successfully removed!!')
+                        try:
+                            number = int(input('Enter a number: '))
+                            user_visit_function(read_file_text('countries'),
+                                                userVisit,
+                                                number)
+                            print('Successfully removed!!')
+                        except ValueError:
+                            print('Please enter a number!!')
 
             case 'show' | 'display':
                 userDisplay=input('Show country, city or both?: ').lower().strip()
