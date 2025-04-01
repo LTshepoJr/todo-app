@@ -7,7 +7,8 @@
     <list default="true" id="da1546f8-0e3a-4795-8197-9736aa461863" name="Changes" comment="created write file function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Storage-Texts/places-visited-cities.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Storage-Texts/places-visited-cities.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage-Texts/places-visited-countries.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Storage-Texts/places-visited-countries.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/places-visited.py" beforeDir="false" afterPath="$PROJECT_DIR$/places-visited.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice.py" beforeDir="false" afterPath="$PROJECT_DIR$/practice.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +39,9 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/todo-app.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1

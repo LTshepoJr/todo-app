@@ -1,10 +1,10 @@
-def readFileText(place):
+def read_file_text(place):
     with open(f'Storage-Texts/places-visited-{place}.txt',
               'r') as file:
-        fileList=file.readlines()
-        return fileList
+        file_list=file.readlines()
+        return file_list
 
-def writeFileText(user, regionArray):
+def write_file_text(user, region_array):
     with open('Storage-Texts/places-visited-'
               f'{'countries' 
               if user=='country'
@@ -12,29 +12,29 @@ def writeFileText(user, regionArray):
               if user=='city'
               else ''}.txt',
               'w') as file:
-        file.writelines(regionArray)
+        file.writelines(region_array)
 
-def userAdditionFunction(regionArray, userChoose):
-    region = input(f'Enter a {userChoose}: ').strip()
-    regionArray.append(region.title()+'\n')
-    writeFileText(userChoose, regionArray)
+def user_addition_function(region_array, user_choose):
+    region = str(input(f'Enter a {user_choose}: ').strip())
+    region_array.append(region.title() + '\n')
+    write_file_text(user_choose, region_array)
     
-def userEditFunction(regionArray, userEdit, number):
-    print(f'You are going to change {regionArray[number - 1].strip('\n')}')
-    newPlace = input(f'Enter new {userEdit}: ').title()
-    regionArray[number - 1] = newPlace+'\n'
-    writeFileText(userEdit, regionArray)
+def user_edit_function(region_array, user_edit, edit_number):
+    print(f'You are going to change {region_array[edit_number - 1].strip('\n')}')
+    new_place = input(f'Enter new {user_edit}: ').title()
+    region_array[number - 1] = new_place + '\n'
+    write_file_text(user_edit, region_array)
     
-def userVisitFunction(regionArray, userVisit, number):
-    print(f'You visited: {regionArray.pop(number - 1).strip('\n')}')
-    writeFileText(userVisit, regionArray)
+def user_visit_function(region_array, user_visit, visit_number):
+    print(f'You visited: {region_array.pop(visit_number - 1).strip('\n')}')
+    write_file_text(user_visit, region_array)
     
-def userDisplayFunction(regionArray):
-    for index, item in enumerate(regionArray):
+def user_display_function(region_array):
+    for index, item in enumerate(region_array):
         print(f'{index + 1}. {item.strip('\n')}')
         
-def stripLineBreak(array):
-    return [list.strip('\n') for list in array]
+def strip_line_break(array):
+    return [LIST.strip('\n') for LIST in array]
 
 while True:
     
@@ -47,55 +47,55 @@ while True:
         userPlace=userAction.split()[1].lower()
         if userPlace=='country' or 'cities':
             if userChooses=='add':
-                userAdditionFunction(readFileText(f'countries' 
+                user_addition_function(read_file_text(f'countries'
                                                     if userPlace=='country'
                                                     else 'cities' 
                                                     if userPlace=='city' 
                                                     else ''),
-                                                userPlace)
+                                       userPlace)
                 print('Successfully added!!')
             elif userChooses=='edit':
                 number=int(input('Enter a number: '))
-                userEditFunction(readFileText(f'countries' 
+                user_edit_function(read_file_text(f'countries'
                                                     if userPlace=='country'
                                                     else 'cities' 
                                                     if userPlace=='city' 
                                                     else ''),
-                                        userPlace,
-                                        number)
+                                   userPlace,
+                                   number)
                 print('Successfully edited!!')
             elif userChooses=='visited':
                 number=int(input('Enter a number: '))
-                userVisitFunction(readFileText(f'countries' 
+                user_visit_function(read_file_text(f'countries'
                                                     if userPlace=='country'
                                                     else 'cities' 
                                                     if userPlace=='city' 
                                                     else ''),
-                                        userPlace,
-                                        number)
+                                    userPlace,
+                                    number)
                 print('Successfully removed!!')
             elif userChooses=='show' or 'display':
                 if userAction.split()[1]!='both':
-                    userDisplayFunction(readFileText(f'countries' 
+                    user_display_function(read_file_text(f'countries'
                                                     if userPlace=='country'
                                                     else 'cities' 
                                                     if userPlace=='city' 
                                                     else ''))
                 else:
-                    print(f'Countries: {stripLineBreak(readFileText('countries'))}//',
-                            f'//Cities: {stripLineBreak(readFileText('cities'))}')
+                    print(f'Countries: {strip_line_break(read_file_text('countries'))}//',
+                            f'//Cities: {strip_line_break(read_file_text('cities'))}')
     else:
         match userAction:
             case 'add':
                 userAddition = input('Choose between country or city: ').lower().strip()
                 match userAddition:
                     case 'country':
-                        userAdditionFunction(readFileText('countries'),
-                                            userAddition)
+                        user_addition_function(read_file_text('countries'),
+                                               userAddition)
                         print('Successfully added!!')
                     case 'city':
-                        userAdditionFunction(readFileText('cities'),
-                                            userAddition)
+                        user_addition_function(read_file_text('cities'),
+                                               userAddition)
                         print('Successfully added!!')
 
             case 'edit':
@@ -103,14 +103,14 @@ while True:
                 number=int(input('Enter a number: '))
                 match userEdit:
                     case 'city':
-                        userEditFunction(readFileText('cities'),
-                                        userEdit,
-                                        number)
+                        user_edit_function(read_file_text('cities'),
+                                           userEdit,
+                                           number)
                         print('Successfully edited!!')
                     case 'country':
-                        userEditFunction(readFileText('countries'),
-                                        userEdit,
-                                        number)
+                        user_edit_function(read_file_text('countries'),
+                                           userEdit,
+                                           number)
                         print('Successfully edited!!')
                 
             case 'visited':
@@ -118,26 +118,26 @@ while True:
                 number=int(input('Enter a number: '))
                 match userVisit:
                     case 'city':
-                        userVisitFunction(readFileText('cities'),
-                                        userVisit,
-                                        number)
+                        user_visit_function(read_file_text('cities'),
+                                            userVisit,
+                                            number)
                         print('Successfully removed!!')
                     case 'country':
-                        userVisitFunction(readFileText('countries'),
-                                        userVisit,
-                                        number)
+                        user_visit_function(read_file_text('countries'),
+                                            userVisit,
+                                            number)
                         print('Successfully removed!!')
 
             case 'show' | 'display':
                 userDisplay=input('Show country, city or both?: ').lower().strip()
                 match userDisplay:
                     case 'country':
-                        userDisplayFunction(readFileText('countries'))
+                        user_display_function(read_file_text('countries'))
                     case 'city':
-                        userDisplayFunction(readFileText('cities'))
+                        user_display_function(read_file_text('cities'))
                     case 'both':
-                        print(f'Countries: {stripLineBreak(readFileText('countries'))}//',
-                            f'//Cities: {stripLineBreak(readFileText('cities'))}')
+                        print(f'Countries: {strip_line_break(read_file_text('countries'))}//',
+                            f'//Cities: {strip_line_break(read_file_text('cities'))}')
                 
             case 'exit':
                 break
